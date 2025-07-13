@@ -47,41 +47,13 @@
         flex-direction: column;
         gap: 0.5em;
       }
-
-      #run {
-        border: 1px solid black;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      button {
-        cursor: pointer;
-        user-select: none;
-        -webkit-user-select: none;
-        padding: 0.5em 1em;
-      }
     </style>
   </head>
   <body>
     <noscript>
       JavaScript is required to convert the URL into a usable web page.
     </noscript>
-    <div class="warning">
-      <p>
-        The page below may be malicious. For example, it could be a phishing
-        page to steal your data, or it could try to download dangerous code onto
-        your computer. Do not load the page below unless you trust the person
-        who sent you the link.
-      </p>
-      <p>Do not enter any personal information into the page below.</p>
-    </div>
     <iframe id="frame"></iframe>
-    <div id="run">
-      <button onclick="runCode()">Load page</button>
-    </div>
     <script type="text/javascript" src="b64.js"></script>
     <script type="text/javascript" src="api.js"></script>
     <script type="text/javascript">
@@ -97,7 +69,6 @@
 
       function runCode() {
         document.getElementById("frame").style.display = "block";
-        document.getElementById("run").remove();
 
         var hash = window.location.hash.slice(1);
         var data = b64.decode(hash);
@@ -110,6 +81,9 @@
           write(decodeURIComponent(data));
         }
       }
+
+      // Automatically run the code when the page loads
+      window.onload = runCode;
     </script>
   </body>
 </html>
